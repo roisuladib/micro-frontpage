@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import YouTube from 'react-youtube';
 import { CSSTransition } from 'react-transition-group';
 import NumberFormat from '/src/helpers/NumberFormat';
@@ -119,41 +120,18 @@ const ClassDetail = ({ data }) => {
               </p>
             </section>
 
-            <section>
+            <section className="mt-10">
               <h6 className="font-medium text-2xl c-5 mb-3">Photos <span className="c-3">Course</span></h6>
-              <div className="flex">
-                
+              <div className="flex justify-start items-center -mx-4 mt-6">
+                {
+                  data?.image?.length > 0 ? data?.image?.map(photo => <CoursePhotos key={photo.id} data={photo.image} />) : <div className="w-full text-center py-12">Image Not Found</div>
+                }
               </div>
             </section>
 
           </div>
         </div>
       </section>
-
-      <main className="container mx-auto px-4 relative z-0" id="content">
-        {/* <section className="w-3/4 mx-auto mt-14" id="desc">
-          <div className="w-4/5">
-            <div>
-              <h6 className="font-medium text-2xl c-5 mb-3">About <span className="c-3">Course</span></h6>
-              <p className="font-light text-lg c-4 leading-[30px] mb-3">
-                {data?.description ?? 'Description...'}
-              </p>
-            </div>
-          </div>
-        </section> */}
-        <section className="w-3/4 mx-auto mt-14" id="photo">
-          {/* <div>
-            <h6 className="font-medium text-2xl c-5 mb-3">Photos <span className="c-3">Course</span></h6>
-          </div>
-          <div className="flex justify-start items-center -mx-4 mt-6">
-            {
-              data?.image?.length > 0 ?
-              data?.image?.map((photo, index) => <CoursePhotos data={photo.image} key={index} />) :
-              <div className="w-full text-center py-12">Image not found</div>
-            }
-          </div> */}
-        </section>
-      </main>
 
       <div className="h-[1000px]"></div>
       <section ref={footer}>

@@ -1,6 +1,5 @@
-import Play from '/public/images/ic-play.svg';
-import Image from 'next/image';
 import Link from 'next/link';
+import Play from '/public/images/ic-play.svg';
 
 const Card = ({ item }) => {
   return (
@@ -8,7 +7,6 @@ const Card = ({ item }) => {
       <div className="courses-card relative h-full overflow-hidden mb-8">
         <figure className="thumb-card overflow-hidden">
           <Play />
-          {/* <Image src={Play} width={200} height="200" /> */}
           <img className="h-[110px] md:h-[170px] w-full object-cover object-center rounded-t-xl" src={item?.thumbnail ?? '/images/placeholder.jpg'} alt={item?.thumbnail ?? 'Some information'} />
         </figure>
         <div className="meta-card mt-3">
