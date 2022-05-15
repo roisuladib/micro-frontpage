@@ -42,21 +42,19 @@ const Categories = () => {
    
    return (
       <>
-         <section className="container mx-auto px-4 pt-[68px] pb-[110px]" id="category-class">
-          <div className="items-start justify-center">
-            <p className="c-4 font-normal text-lg mb-1">Category</p>
-            <p className="c-5 text-2xl font-medium">Explore & <span className="c-3">Learn</span></p>
-          </div>
-          <div className="flex flex-wrap justify-start items-center -mx-4 mt-[30px]">
-            {data?.length > 0 ? (
-               data.map((item, index) => {
-               return <Card item={item} key={index} />;
-               })
-            ) : (
-               <p className="">Courses not found...</p>
-            )}
+         <div className="items-start justify-center">
+         <p className="c-4 font-normal text-lg mb-1">Category</p>
+         <p className="c-5 text-2xl font-medium">Explore & <span className="c-3">Learn</span></p>
          </div>
-        </section>
+         <div className="flex flex-wrap justify-start items-center -mx-4 mt-[30px]">
+         {data?.length > 0 ? (
+            data.map((item, index) => {
+            return <Card item={item} key={index} />;
+            })
+         ) : (
+            <p className="">Courses not found...</p>
+         )}
+         </div>
       </>
    );
 }

@@ -12,10 +12,10 @@ const Modal = props => {
 
    const idModal = 'modal';
 
-   const toggle = () => props.toggleModal ? props.toggleModal() : setDisplay(!display); 
+   const toggle = () => props.taoggleModal ? props.toggleModal() : setDisplay(!display); 
    const toggleAllow = () => setAllow(!allow); 
    const handleOutside = e => {
-      if (modalRef?.current?.contains?.(e.target) && allow) toggle();
+      if (modalRef?.current && !modalRef?.current?.contains?.(e.target) && allow) toggle();
    }
 
    useEffect(() => {
@@ -28,8 +28,10 @@ const Modal = props => {
    useEffect(() => document.addEventListener('mousedown', handleOutside, 
    () => document.removeEventListener('mousedown', handleOutside)));
 
-   useEffect(() => display || props.in ? document.querySelector('body').classList.add('modal-open') : null,
-   () => document.querySelector('body').classList.remove('modal-open'), [display, props.in]);
+   useEffect(() => {
+      if (display || props.in) document.querySelector('body').classList.add('modal-open');
+      return () => document.querySelector('body').classList.remove('modal-open');
+   }, [display, props.in]);
 
    if (!ready) return null;
 
@@ -40,15 +42,14 @@ const Modal = props => {
             {
                createPortal(
                   <CSSTransition in={props.in ?? display} timeout={500} onExit={toggleAllow} onExited={toggleAllow} classNames="overlay" unmountOnExit>
-                     <div className="overlay fixed inset-0 h-screen z-50">
-                        <div className="absolute inset-0 bg-black opacity-25 z-10">
-                           <div className="absolute flex items-center justify-center inset-0 z-20">
-                              <div ref={modalRef} style={props.modalStyle} className="bg-white shadow-2xl text-2xl max-w-3xl max-h-96">
-                                 <div className="relative">
-                                    <span onClick={toggle} className="modal-close" />
-                                 </div>
-                                 {props.content(toggle)}
+                     <div className="overlay fixed bg-[#00000095] inset-0 h-screen z-50">
+                        <div className="absolute inset-0 bg-black opacity-25 z-10" />
+                        <div className="absolute flex items-center justify-center inset-0 z-20">
+                           <div ref={modalRef} style={props.modalStyle} className="bg-white shadow-2xl w-full md:w-auto md:max-w-3xl rounded-xl">
+                              <div className="relative">
+                                 <span onClick={toggle} title="close" className="modal-close" />
                               </div>
+                              {props.content(toggle)}
                            </div>
                         </div>
                      </div>

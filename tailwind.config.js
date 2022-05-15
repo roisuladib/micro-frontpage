@@ -349,6 +349,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'poppins',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',

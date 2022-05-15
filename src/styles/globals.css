@@ -94,6 +94,80 @@
    .checkout-meta-enter-done {
       @apply bottom-0 opacity-100 fixed;
    }
+
+    /* modal */
+    .modal-close {
+      @apply absolute right-0 sm:-right-12 -top-12 cursor-pointer inline-block w-[30px] h-[30px] bg-[#36C2CF] hover:bg-[#2b929c] rounded-xl;
+    }
+    .modal-close::after,
+    .modal-close::before {
+      @apply absolute top-1/2 left-1/2 w-[15px] h-[2px] content-[''] bg-white ml-[-25%] rounded-xl;
+    }
+    .modal-close::before {
+      @apply transform rotate-45;
+    }
+    .modal-close::after {
+      @apply transform -rotate-45;
+    }
+    .overlay {
+      @apply transition-all duration-500;
+    }
+    .overlay-enter {
+      @apply opacity-0;
+    }
+    .overlay-enter-active {
+      @apply opacity-50;
+    }
+    .overlay-enter-done {
+      @apply opacity-100;
+    }
+    .overlay-exit {
+      @apply opacity-100;
+    }
+    .overlay-exit-active {
+      @apply opacity-50;
+    }
+    .overlay-exit-done {
+      @apply opacity-0;
+    }
+
+    /* Accordion */
+    .accordion-item {
+       @apply transition-all duration-300;
+    }
+    .accordion-item-enter {
+       @apply opacity-0;
+    }
+    .accordion-item-enter-active {
+       @apply opacity-100;
+    }
+    .accordion-item-exit {
+       @apply opacity-100;
+    }
+    .accordion-item-exit-active {
+       @apply opacity-0;
+    }
+
+    /* Star */
+    #svg-star {
+       @apply absolute w-0 h-0 -left-[9999px] -top-[9999px];
+    }
+
+    .stars {
+       @apply relative inline-flex;
+    }
+    .stars .star {
+       @apply absolute;
+       clip-path: url(#star);
+       /* mask: url(../../public/images/ic-start.svg) no-repeat center left; */
+    }
+    .stars .star:not(.placeholder) {
+       @apply z-[2] b-4;
+    }
+    .stars .star.placeholder {
+       @apply z-[1] bg-gray-200;
+    }
+   
 }
 
 @layer utilities {
@@ -133,5 +207,11 @@
    }
    .b-3 {
       background: #FE721C;
+   }
+   .b-4 {
+      background: #FFD911;
+   }
+   .b-5 {
+      background: #F6F6F6;
    }
 }

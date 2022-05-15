@@ -11,15 +11,13 @@ const Partner = ({ img }) => {
 const Clients = () => {
    return (
       <>
-         <section className="container mx-auto px-4 py-24" id="clients">
-          <div className="flex flex-wrap justify-between xl:justify-center items-center text-center">
-            <Partner img="/images/amazon.svg" />
-            <Partner img="/images/microsoft.svg" />
-            <Partner img="/images/tesla.svg" />
-            <Partner img="/images/google.svg" />
-            <Partner img="/images/facebook.svg" />
-          </div>
-        </section>
+        <div className="flex flex-wrap justify-between xl:justify-center items-center text-center">
+          <Partner img="/images/amazon.svg" />
+          <Partner img="/images/microsoft.svg" />
+          <Partner img="/images/tesla.svg" />
+          <Partner img="/images/google.svg" />
+          <Partner img="/images/facebook.svg" />
+        </div>
       </>
    );
 }

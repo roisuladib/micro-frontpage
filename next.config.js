@@ -3,7 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig;
+module.exports = {
+  nextConfig,
+  images: {
+    domains: ['localhost:8080'],
+    // formats: ['image/avif', 'image/webp', 'image/png', 'image/jpg', 'image/svg', 'image/jpeg'],
+  },
+}
 
 const withPlugins = require('next-compose-plugins');
 const withReactSvg = require('next-react-svg');

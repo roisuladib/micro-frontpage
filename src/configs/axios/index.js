@@ -1,10 +1,11 @@
 import axios from 'axios';
 import errorHandler from './errorHandler';
 
-const Instance = axios.create({
-   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`
+const instance = axios.create({
+   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+   timeout: process.env.TIMEOUT,
 });
 
-Instance.interceptors.response.use(response => response.data, errorHandler);
+instance.interceptors.response.use(response => response.data, errorHandler);
 
-export default Instance; 
+export default instance; 

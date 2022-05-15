@@ -9,12 +9,11 @@ import Footer from "../components/Footer";
 
 import { toast } from 'react-toastify';
 
-import classHandle from '../constans/Api/classes';
+import handleClass from '../constans/Api/classes';
 
-const Index = props => {
+export default function Index(props) {
   const { data } = props;
   data?.status === 'success' ? toast.success(data?.message) : toast.error(data?.message);
-  // console.log(data.data.data);
   return (
     <>
       <Head>
@@ -22,7 +21,6 @@ const Index = props => {
           Belajar Coding dan Desain Dengan Mentor Yang Berpengalaman | Kang
           Koding
         </title>
-        <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo.png`} type="image/x-icon" />
         <meta
           name="description"
           content="Kang Koding Adalah Sebuah Platform Bembelajaran Pemrograman Online"
@@ -33,7 +31,7 @@ const Index = props => {
         />
       </Head>
 
-      <div className="header-clip">
+      <header className="header-clip">
         <div className="absolute left-0 bottom-8 xs:bottom-9">
           <Image src="/images/circle.svg" width={300} height={300} alt={'sfdfd'} />
         </div>
@@ -42,12 +40,20 @@ const Index = props => {
           <Navbar />
           <Hero />
         </div>
-      </div>
+      </header>
 
       <main>
-        <Clients />
-        <Courses data={data?.data?.data} />
-        <Categories />
+        <section className="container mx-auto px-4 py-24" id="clients">
+          <Clients />
+        </section>
+
+        <section className="container mx-auto px-4" id="new-class">
+          <Courses data={data?.data?.data} titleL="New Classes" subTitleLL="Summer" subTitleLR="Productive" titleR="View All Classes" />
+        </section>
+
+        <section className="container mx-auto px-4 pt-[68px]" id="category-class">
+          <Categories />
+        </section>
       </main>
 
      <Footer />
@@ -55,18 +61,11 @@ const Index = props => {
   );
 };
 
-
 export async function getStaticProps() {
   try {
-    const data = await classHandle.all();
-    return {
-      props: { 
-        data 
-      },
-    };
-  } catch (err) {
-    return err;
+    const data = await handleClass.all();
+    return {props:{data}};
+  } catch (error) {
+    return error;
   }
 }
-
-export default Index;
