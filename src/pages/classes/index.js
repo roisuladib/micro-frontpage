@@ -5,10 +5,10 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import ListCourses from "../../components/Courses";
 
-import classHandle from '../../constans/Api/classes';
+import apiClasses from '../../constans/Api/classes';
 import Courses from '../../components/Courses';
 
-const Clasess = ({ data }) => {
+export default function Clasess({ data }) {
    const [search, setSearch] = useState('');
    const [searchFocus, setSearchFocus] = useState(false);
    const [searchResponse, setSearchResponse] = useState(() => ({ isLoading: false, isError: false, data: [] }))
@@ -27,11 +27,10 @@ const Clasess = ({ data }) => {
          setSearchResponse({
             isLoading: true, isError: false, data: null
          })
-         classHandle.all({ params: { q: e.target.value } })
+         apiClasses.all({ params: { q: e.target.value } })
          .then(res => {
-            // console.log('response', res.data);
             setSearchResponse({
-               isLoading: false, isError: false, data: res.data.data
+               isLoading: false, isError: false, data: res.data
             });
          })
          .catch(err => {
@@ -109,7 +108,7 @@ const Clasess = ({ data }) => {
 
          <main>
             <section className="container mx-auto px-4">
-               <Courses data={data?.data?.data} titleL="Search Classes" subTitleLL="Let's" subTitleLR="Learn" titleR="" />
+               <Courses data={data} titleL="Search Classes" subTitleLL="Let's" subTitleLR="Learn" titleR="" />
             </section>
          </main>
 
@@ -121,13 +120,22 @@ const Clasess = ({ data }) => {
    );
 }
 
-export async function getStaticProps() {
+Clasess.getInitialProps = async () => {
    try {
-      const data = await classHandle.all();
-      return { props: {data} }
+     const data = await apiClasses.all();
+     return {
+       data : data?.data
+     }
    } catch (error) {
-      return error;
+     return error;
    }
-}
+ }
 
-export default Clasess;
+// export async function getStaticProps() {
+//    try {
+//       const data = await apiClasses.all();
+//       return { props: {data} }
+//    } catch (error) {
+//       return error;
+//    }
+// }

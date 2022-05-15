@@ -10,7 +10,7 @@ import Student from '/public/images/ic_student.svg';
 import Video from '/public/images/ic_video.svg';
 import Certificate from '/public/images/ic_certificate.svg';
 
-import classHandle from '../../constans/Api/classes';
+import apiClasses from '../../constans/Api/classes';
 import Features from '../../components/Detail/Features';
 import PreviewVideo from '../../components/Detail/PreviewVideo';
 import Footer from '../../components/Footer';
@@ -219,8 +219,8 @@ const ClassDetail = ({ data }) => {
 ClassDetail.getInitialProps = async props => {
   const { id } = props.query;
   try {
-    const data = await classHandle.detail(id);
-    return {data: data.data};
+    const data = await apiClasses.detail(id);
+    return {data: data};
   } catch (error) {
     return error;
   }

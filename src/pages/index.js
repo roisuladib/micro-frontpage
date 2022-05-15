@@ -9,11 +9,11 @@ import Footer from "../components/Footer";
 
 import { toast } from 'react-toastify';
 
-import handleClass from '../constans/Api/classes';
+import apiClasses from '../constans/Api/classes';
 
 export default function Index(props) {
   const { data } = props;
-  data?.status === 'success' ? toast.success(data?.message) : toast.error(data?.message);
+  // data?.status === 'success' ? toast.success(data?.message) : toast.error(data?.message);
   return (
     <>
       <Head>
@@ -48,7 +48,7 @@ export default function Index(props) {
         </section>
 
         <section className="container mx-auto px-4" id="new-class">
-          <Courses data={data?.data?.data} titleL="New Classes" subTitleLL="Summer" subTitleLR="Productive" titleR="View All Classes" />
+          <Courses data={data} titleL="New Classes" subTitleLL="Summer" subTitleLR="Productive" titleR="View All Classes" />
         </section>
 
         <section className="container mx-auto px-4 pt-[68px]" id="category-class">
@@ -56,16 +56,26 @@ export default function Index(props) {
         </section>
       </main>
 
-     <Footer />
+      <Footer />
     </>
   );
 };
 
-export async function getStaticProps() {
+Index.getInitialProps = async () => {
   try {
-    const data = await handleClass.all();
-    return {props:{data}};
+    const data = await apiClasses.all();
+    return {
+      data : data?.data
+    }
   } catch (error) {
     return error;
   }
 }
+// export async function getStaticProps() {
+//   try {
+//     const data = await apiClasses.all();
+//     return {props:{data}};
+//   } catch (error) {
+//     return error;
+//   }
+// }
